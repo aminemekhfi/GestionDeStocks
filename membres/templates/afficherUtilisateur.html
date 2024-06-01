@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% block title %}Informations sur l'utilisateur : {{ utilisateur.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <div class="text-right">
+        <a href="{% url 'listeUtilisateur' %}" class="btn btn-info">Retour à la liste des Utilisateurs</a>
+    </div>
+    <h2>Détails sur l'utilisateur N°{{ utilisateur.id }} :</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Id de l'utilisateur :</th>
+            <td>{{ utilisateur.id }}</td>
+        </tr>
+        <tr>
+            <th>UserName de l'utilisateur :</th>
+            <td>{{ utilisateur.username }}</td>
+        </tr>
+        <tr>
+            <th>Nom de l'utilisateur :</th>
+            <td>{{ utilisateur.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Prénom de l'utilisateur :</th>
+            <td>{{ utilisateur.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Email de l'utilisateur :</th>
+            <td>{{ utilisateur.email }}</td>
+        </tr>
+        <tr>
+            <th>Dernière date de connexion de l'utilisateur :</th>
+            <td>{{ utilisateur.last_login }}</td>
+        </tr>
+        <tr>
+            <th>Date de création de l'utilisateur :</th>
+            <td>{{ utilisateur.date_joined }}</td>
+        </tr>
+        <tr>
+            <th>Statut de l'utilisateur :</th>
+            {% if utilisateur.is_staff %}
+            <td>Utilisateur Admin</td>
+            {% else %}
+            <td>Utilisateur normal</td>
+            {% endif %}
+        </tr>
+    </table>
+</div>
+{% endif %}
+{% endblock %}

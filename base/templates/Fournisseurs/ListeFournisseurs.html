@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% block title %}Liste des Fournisseurs{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+  <div class="container mt-5">
+    <div class="text-right">
+      <a class="btn btn-success btn" href="{% url 'CreerFournisseur' %}" role="button">Ajouter Fournisseur</a>
+  </div>
+      <h2>Liste des Fournisseurs : </h2>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom Fournisseur : </th>
+              <th scope="col">Date de naissance  : </th>
+              <th scope="col">Téléphone du fournisseur  : </th>
+              <th scope="col">Adresse du fournisseur  : </th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for f in fournisseur %}
+              <tr>
+                <td>{{ f.nomFournisseur }}</td>
+                <td>{{ f.dateDeNaissanceFournisseur }}</td>
+                <td>{{ f.telephoneFournisseur }}</td>
+                <td>{{ f.adresseFournisseur }}</td>
+
+                <td class="text-center">
+                  <a class="btn btn-secondary btn" href="{% url 'DetailFournisseur' f.id %}" role="button">Afficher</a>
+                  <a class="btn btn-primary btn" href="{% url 'ModifierFournisseur' f.id %}" role="button">Modifier</a>
+                  <a class="btn btn-danger" href="{% url 'SupprimerFournisseur' f.id %}" role="button">Supprimer</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  {% else %}
+  <script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endif %}
+{% endblock %}

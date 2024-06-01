@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block title %}Modifier le Stock{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+  <div class="text-right">
+      <a href="{% url 'Stocks' %}" class="btn btn-secondary">Retour a la liste des stocks</a>
+  </div>
+    <h2>Modifier le Stock : </h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success">Modifier le Stock {{ stock.id }}</button>
+    </form>
+  </div>
+  {% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %} 

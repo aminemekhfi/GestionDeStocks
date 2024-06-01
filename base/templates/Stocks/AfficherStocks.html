@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% block title %}Informations du Stock : {{ stock.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <div class="text-right">
+        <a href="{% url 'ModifierStocks' stock.id %}" class="btn btn-success">Modifier le stock {{ stock.id }}</a>
+        <a href="{% url 'Stocks' %}" class="btn btn-info">Retour à la liste des Stocks</a>
+    </div>
+    <h2>Détails du Stock N°{{ stock.id }} : </h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Nom du Stock : </th>
+            <td>{{ stock.nomStock }}</td>
+        </tr>
+        <tr>
+            <th>Quantité : </th>
+            <td>{{ stock.quantiteStock }}</td>
+        </tr>
+        <tr>
+            <th>Description : </th>
+            <td>{{ stock.DescriptionStock }}</td>
+        </tr>
+        <tr>
+            <th>Date d'entrée : </th>
+            <td>{{ stock.dateEntreeStock }}</td>
+        </tr>
+        <tr>
+            <th>Date d'expiration : </th>
+            <td>{{ stock.dateExpirationStock }}</td>
+        </tr>
+        <tr>
+            <th>Statut : </th>
+            <td>{{ stock.statutStock }}</td>
+        </tr>
+    </table>
+</div>
+{% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %}

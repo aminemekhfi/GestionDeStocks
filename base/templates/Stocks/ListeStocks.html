@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% block title %}Liste des Stocks{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+  <div class="text-right">
+    <a class="btn btn-success btn" href="{% url 'CreerStocks' %}" role="button">Ajouter Stock</a>
+</div>
+    <h2>Liste des Stocks : </h2> 
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom Stocks</th>
+            <th scope="col">Quantité Stock</th>
+            <th scope="col">Date éxpiration</th>
+            <th scope="col">Statut Stock</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in stocks %}
+            <tr>
+              <td>{{ s.nomStock }}</td>
+              <td>{{ s.quantiteStock }}</td>
+              <td>{{ s.dateExpirationStock }}</td>
+              <td>{{ s.statutStock }}</td>
+              <td class="text-center">
+                <a class="btn btn-secondary btn" href="{% url 'DetailStocks' s.id %}" role="button">Afficher</a>
+                <a class="btn btn-primary btn" href="{% url 'ModifierStocks' s.id %}" role="button">Modifier</a>
+                <a class="btn btn-danger" href="{% url 'SupprimerStocks' s.id %}" role="button">Supprimer</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+{% else %}
+<script>
+  alert('Session expiré, Connectez-vous de nouveau!')
+</script>
+{% endif %}
+{% endblock %}

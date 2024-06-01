@@ -1,0 +1,132 @@
+{% extends 'index.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block style %}
+<style>
+    .card {
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+        background-color: #ffffff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <h1 class="mb-4">Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"><a href="{% url 'Stocks' %}" class="text-decoration-none text-dark">Stocks</a></div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ nombreStocks }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"><a href="{% url 'Fournisseur' %}" class="text-decoration-none text-dark">Fournisseurs</a></div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ nombreFournisseurs }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"><a href="{% url 'Produits' %}" class="text-decoration-none text-dark">Produits</a></div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ nombreProduits }}</h5>
+                </div>
+            </div>
+        </div>
+        {% if user.is_superuser %}
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"><a href="{% url 'listeUtilisateur' %}" class="text-decoration-none text-dark">Utilisateurs</a></div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ nombreUtilisateurs }}</h5>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Utilisateurs</div>
+                <div class="card-body">
+                    <h5 class="" style="color: red;">Vous n'êtes pas Admin</h5>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" style="color: green;">Derniers Stocks ajoutés</h2>
+                </div>
+                <div class="card-body">
+                    {% for stock in dernierStocks %}
+                    <div class="stock-item">
+                        <p><strong>Id:</strong> {{ stock.id }}</p>
+                        <p><strong>Nom:</strong> {{ stock.nomStock }}</p>
+                        <p><strong>Quantité:</strong> {{ stock.quantiteStock }}</p>
+                    </div><hr />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"  style="color: green;">Derniers Produits ajoutés</h2>
+                </div>
+                <div class="card-body">
+                    {% for produit in dernierProduits %}
+                    <div class="stock-item">
+                        <p><strong>Id:</strong> {{ produit.id }}</p>
+                        <p><strong>Nom:</strong> {{ produit.nomProduit }}</p>
+                        <p><strong>Prix:</strong> {{ produit.prixProduit }}</p>
+                    </div><hr />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"  style="color: green;">Derniers Fournisseurs ajoutés</h2>
+                </div>
+                <div class="card-body">
+                    {% for fournisseur in dernierFournisseurs %}
+                    <div class="stock-item">
+                        <p><strong>Id:</strong> {{ fournisseur.id }}</p>
+                        <p><strong>Nom:</strong> {{ fournisseur.nomFournisseur }}</p>
+                        <p><strong>Téléphone:</strong> {{ fournisseur.telephoneFournisseur }}</p>
+                    </div><hr />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+</div>
+
+</div>
+{% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %}

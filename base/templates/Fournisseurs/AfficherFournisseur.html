@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% block title %}Afficher Fournisseur : {{ fournisseur.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+    <div class="container mt-5">
+        <div class="text-right">
+            <a href="{% url 'ModifierFournisseur' fournisseur.id %}" class="btn btn-success">Modifier le fournisseur {{ fournisseur.id }}</a>
+            <a href="{% url 'Fournisseur' %}" class="btn btn-info">Retour à la liste des Fournisseurs</a>
+        </div>
+        <h2>Détails du Fournisseur N°{{ fournisseur.id }} : </h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Identifiant du Fournisseur : </th>
+                <td>{{ fournisseur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom du Fournisseur : </th>
+                <td>{{ fournisseur.nomFournisseur }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance du Fournisseur : </th>
+                <td>{{ fournisseur.dateDeNaissanceFournisseur }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone du Fournisseur : </th>
+                <td>{{ fournisseur.telephoneFournisseur }}</td>
+            </tr>
+            <tr>
+                <th>Adresse du Fournisseur : </th>
+                <td>{{ fournisseur.adresseFournisseur }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+{% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %}

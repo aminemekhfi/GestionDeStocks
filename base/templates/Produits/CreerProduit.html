@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block title %}Créer un nouveau Stock{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <h2>Ajouter un Produit : </h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-secondary">Ajouter Produit</button>
+    </form>
+  </div>
+{% endif %}
+{% endblock %}

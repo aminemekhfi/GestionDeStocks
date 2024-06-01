@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block title %}Supprimer le fournisseur N° : {{ fournisseur.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+    <div class="container mt-5">
+        <h1>Confirmer la Suppression :</h1>
+        <p>Êtes-vous sûr de vouloir supprimer le fournisseur N°{{ fournisseur.id }} ?</p>
+        <ul>
+            <li>Id du fournisseur : {{ fournisseur.id }}</li>
+            <li>Nom du fournisseur : {{ fournisseur.nomFournisseur }}</li>
+            <li>Date de naissance du fournisseur : {{ fournisseur.dateDeNaissanceFournisseur }}</li>
+            <li>Téléphone du fournisseur : {{ fournisseur.telephoneFournisseur }}</li>
+            <li>Adresse du fournisseur : {{ fournisseur.adresseFournisseur }}</li>
+        </ul> 
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a href="{% url 'Fournisseur' %}" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+    {% endif %}
+    {% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %}

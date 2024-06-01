@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% block title %}Afficher Produit : {{ produits.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <div class="text-right">
+        <a href="{% url 'ModifierProduit' produits.id %}" class="btn btn-success">Modifier le Produit {{ produits.id }}</a>
+        <a href="{% url 'Produits' %}" class="btn btn-info">Retour à la liste des Produits</a>
+    </div>
+    <h2>Détails du Stock N°{{ produits.id }} : </h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Identifiant du Produit : </th>
+            <td>{{ produits.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom du Produit : </th>
+            <td>{{ produits.nomProduit }}</td>
+        </tr>
+        <tr>
+            <th>Catégorie du Produit : </th>
+            <td>{{ produits.categorieProduit }}</td>
+        </tr>
+        <tr>
+            <th>Prix du Produit : </th>
+            <td>{{ produits.prixProduit }}</td>
+        </tr>
+        <tr>
+            <th>Description du Produit : </th>
+            <td>{{ produits.descriptionProduit }}</td>
+        </tr>
+        <tr>
+            <th>Date d'éxpiration du Produit : </th>
+            <td>{{ produits.dateExpirationProduit }}</td>
+        </tr>
+        <tr>
+            <th>Nom du stock associé au Produit : </th>
+            <td>{{ produits.stock }}</td>
+        </tr>
+        <tr>
+            <th>Produit fournit par : </th>
+            <td>{{ produits.fournisseur }}</td>
+        </tr>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}Supprimer Produit : {{ produits.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <h1>Confirmer la Suppression :</h1>
+    <p>Êtes-vous sûr de vouloir supprimer le stock N°{{ produits.id }} ?</p>
+    <ul>
+        <li>Nom du Produit : {{ produits.nomProduit }}</li>
+        <li>Categorie du Produit : {{ produits.categorieProduit }}</li>
+        <li>Prix du Produit : {{ produits.DescriptionStock }}</li>
+        <li>Stock associé : {{ produits.stock }}</li>
+        <li>Nom du fournisseur : {{ produits.fournisseur }}</li>
+        <li>Date d'expiration du Produit: {{ produits.dateExpirationProduit }}</li>
+    </ul>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a href="{% url 'Produits' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+</script>
+{% endif %}
+{% endblock %}

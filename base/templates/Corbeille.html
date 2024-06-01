@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% block title %}Crobeille{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <h2>Corbeille : </h2>
+    <h6 style="color: green;">Stocks : </h6>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom </th>
+            <th scope="col">Date de suppression </th>
+            <th scope="col">Quantité </th>
+            <th scope="col">Description </th>
+            <th scope="col">Date Entrée</th>
+            <th scope="col">Date Expiration</th>
+            <th scope="col">Statut </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in StocksCorbeille %}
+            <tr>
+                <td>{{ s.nomStockCorbeille }}</td>
+                <td>{{ s.dateSupressionStocks }}</td>
+                <td>{{ s.quantiteStockCorbeille }}</td>
+                <td>{{ s.DescriptionStockCorbeille }}</td>
+                <td>{{ s.dateEntreeStockCorbeille }}</td>
+                <td>{{ s.dateExpirationStockCorbeille }}</td>
+                <td>{{ s.statutStockCorbeille }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <hr />
+      <h6 style="color: green;">Fournisseurs : </h6>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom </th>
+              <th scope="col">Date de suppression </th>
+              <th scope="col">Date de naissance </th>
+              <th scope="col">Téléphone </th>
+              <th scope="col">Adresse</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for f in FournisseurCorbeille %}
+              <tr>
+                  <td>{{ f.nomFournisseurCorbeille }}</td>
+                  <td>{{ f.dateSupressionFournisseurs }}</td>
+                  <td>{{ f.dateDeNaissanceFournisseurCorbeille }}</td>
+                  <td>{{ f.telephoneFournisseurCorbeille }}</td>
+                  <td>{{ f.adresseFournisseurCorbeille }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <hr />
+        <h6 style="color: green;">Produits : </h6>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom </th>
+                <th scope="col">Date de suppression </th>
+                <th scope="col">Catégorie </th>
+                <th scope="col">Prix </th>
+                <th scope="col">Description</th>
+                <th scope="col">Date expiration</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in ProduitsCorbeille %}
+                <tr>
+                    <td>{{ p.nomProduitCorbeille }}</td>
+                    <td>{{ p.dateSupressionProduitsCorbeille }}</td>
+                    <td>{{ p.categorieProduitCorbeille }}</td>
+                    <td>{{ p.prixProduitCorbeille }}</td>
+                    <td>{{ p.descriptionProduitCorbeille }}</td>
+                    <td>{{ p.dateExpirationProduitCorbeille }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+  </div>
+{% else %}
+<script>
+  alert('Session expiré, Connectez-vous de nouveau!')
+</script>
+{% endif %}
+{% endblock %}

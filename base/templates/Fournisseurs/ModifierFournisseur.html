@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% block title %}Modifier le Fournisseur : {{ fournisseur.id }}{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+  <div class="container mt-5">
+    <div class="text-right">
+        <a href="{% url 'Fournisseur' %}" class="btn btn-secondary">Retour a la liste des Fournisseurs</a>
+    </div>
+      <h2>Modifier le Fournisseur : {{ fournisseur.id }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Modifier le Fournisseur {{ fournisseur.id }}</button>
+      </form>
+    </div>
+  {% endif %}
+  {% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %} 

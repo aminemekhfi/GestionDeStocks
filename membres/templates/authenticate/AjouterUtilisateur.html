@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% block title %}Espace Admin{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+          <div class="shadow card mt-5">
+              <div class="card-header text-center">
+                  <h3>Ajouter un Utilisateur : </h3>
+              </div>
+              <div class="card-body">
+                  <form method="post" action="{% url 'ajouterUtilisateur' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                   
+                      <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %} 

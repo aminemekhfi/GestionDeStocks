@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}Réstaurer{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <h1>Confirmer la Suppression :</h1>
+    <p>Êtes-vous sûr de vouloir supprimer le stock N°{{ stock.id }} ?</p>
+    <ul>
+        <li>Nom du Stock : {{ stock.nomStock }}</li>
+        <li>Quantité : {{ stock.quantiteStock }}</li>
+        <li>Description : {{ stock.DescriptionStock }}</li>
+        <li>Date d'entrée : {{ stock.dateEntreeStock }}</li>
+        <li>Date d'expiration : {{ stock.dateExpirationStock }}</li>
+        <li>Statut : {{ stock.statutStock }}</li>
+    </ul>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a href="{% url 'Stocks' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %}

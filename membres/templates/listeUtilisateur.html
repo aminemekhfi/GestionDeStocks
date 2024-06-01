@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% block title %}Liste des Utilisateurs {% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+  <div class="text-right">
+    <a class="btn btn-success btn" href="{% url 'ajouterUtilisateur' %}" role="button">Ajouter Utilisateur</a>
+</div>
+    <h2>Liste des Utilisateurs : </h2> 
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom du l'utilisateur : </th>
+            <th scope="col">Email de l'utilisateur : </th>
+            <th scope="col">Statut de l'utilisateur : </th>
+            <th scope="col">Dérnière date de connexion : </th>
+            <th scope="col">Actions : </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in utilisateur %}
+            <tr>
+              <td>{{ u.username  }}</td>
+              <td>{{ u.email }}</td>
+              {% if u.is_staff %}
+              <td>Utilisateur Admin</td>
+              {% else %}
+              <td>Utilisateur normal</td>
+              {% endif %}
+              <td>{{ u.last_login }}</td>
+              <td class="text-center">
+                <a class="btn btn-secondary btn" href="{% url 'afficherUtilisateur' u.id %}" role="button">Afficher</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+{% else %}
+<script>
+  alert('Session expiré, Connectez-vous de nouveau!')
+</script>
+{% endif %}
+{% endblock %}

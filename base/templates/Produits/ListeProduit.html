@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% block title %}Liste des Produits{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-5">
+  <div class="text-right">
+    <a class="btn btn-success btn" href="{% url 'CreerProduit' %}" role="button">Ajouter Produit</a>
+</div>
+    <h2>Liste des Produits : </h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom Produit : </th>
+            <th scope="col">Categorie Produit : </th>
+            <th scope="col">Prix Produit : </th>
+            <th scope="col">Stock associé : </th>
+            <th scope="col">Date expiration Produit : </th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in produits %}
+            <tr>
+              <td>{{ p.nomProduit }}</td>
+              <td>{{ p.categorieProduit }}</td>
+              <td>{{ p.prixProduit }}</td>
+              <td>{{ p.stock }}</td>
+              <td>{{ p.dateExpirationProduit }}</td>
+              <td class="text-center">
+                <a class="btn btn-secondary btn" href="{% url 'DetailProduit' p.id %}" role="button">Afficher</a>
+                <a class="btn btn-primary btn" href="{% url 'ModifierProduit' p.id %}" role="button">Modifier</a>
+                <a class="btn btn-danger" href="{% url 'SupprimerProduit' p.id %}" role="button">Supprimer</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+{% else %}
+<script>
+  alert('Session expiré, Connectez-vous de nouveau!')
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% block title %}À propos{% endblock %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <br />
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 d-flex align-items-center">
+                            <img src="logo.png" class="img-fluid rounded" alt="About Us Image">
+                        </div>
+                        <div class="col-md-8">
+                            
+                            <h2 class="card-title">À propos</h2>
+                            <p class="card-text">
+                                Bienvenue sur notre site! Nous nous engageons à fournir les meilleurs services et produits à nos clients. Notre mission est d'innover et de devenir leader dans notre industrie, en garantissant la satisfaction de nos clients grâce à une amélioration continue et un service exceptionnel.
+                                </p>
+                            <p class="card-text">
+                                 Nous valorisons l’intégrité, la collaboration et une approche axée sur le client.
+                                Merci de nous avoir choisi. Nous avons hâte de travailler avec vous et de réaliser de grandes choses ensemble !
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    {% if user.is_authenticated %}
+    <div class="row justify-content-center">
+        <a class="btn btn-warning" href="{% url 'deconnexion' %}" role="button">Se déconnecter</a>
+    </div>
+    {% else %}
+    <div class="row justify-content-center">
+        <a class="btn btn-warning" href="{% url 'connexion' %}" role="button">Connecter-vous pour accéder à l'application</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

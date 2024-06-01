@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block title %}Accueil{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="container">
+      <h1 class="display-4">Bienvenue sur notre site de gestion de stocks !</h1>
+      <p class="lead">Gérez efficacement vos produits et vos stocks avec notre plateforme simple d'utilisation.</p>
+      <hr class="my-4">
+      <p>Commencez dès maintenant en explorant nos fonctionnalités.</p>
+      {% if user.is_authenticated %}
+          <a class="btn btn-warning" href="{% url 'Dashboard' %}" role="button">Lancez-vous</a>
+      {% else %}
+        <a class="btn btn-secondary btn-lg" href="{% url 'connexion' %}" role="button">Connecter-vous</a>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

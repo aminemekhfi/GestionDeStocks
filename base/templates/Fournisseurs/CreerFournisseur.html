@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% block title %}Créer un nouveau Fournisseur{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_superuser %}
+  <div class="container mt-5">
+      <h2>Ajouter un Fournisseur : </h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-secondary">Ajouter Fournisseur</button>
+      </form>
+  </div>
+  {% endif %}
+{% else %}
+<script>
+    alert('Session expiré, Connectez-vous de nouveau!')
+  </script>
+{% endif %}
+{% endblock %}
